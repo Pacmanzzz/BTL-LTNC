@@ -57,7 +57,6 @@ void App::run()
 
         game.update(&event);
         game.render();
-        game.checkWin();
     }
 }
 

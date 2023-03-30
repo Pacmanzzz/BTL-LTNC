@@ -24,9 +24,4 @@ void Game::render() const
     SDL_RenderPresent(App::getRenderer());
 }
 
-void Game::checkWin()
-{
-    if(board.hasWinner() || board.isDraw())
-        state = STATE_STOPPED;
-}
 
