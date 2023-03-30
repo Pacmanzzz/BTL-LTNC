@@ -1,8 +1,3 @@
-// main.cpp
-// app entry point.
-//
-// Author: yat0 - https://github.com/yat0
-
 #include "App.h"
 #include <cstdio>
 

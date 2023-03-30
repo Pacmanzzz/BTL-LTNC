@@ -1,8 +1,3 @@
-// Board.h
-// Board class definition. Member-functions defined in Board.cpp
-//
-// Author: yat0 - https://github.com/yat0
-
 #ifndef _BOARD_
 #define _BOARD_
 
@@ -26,7 +21,6 @@ private:
     BOARD_PIECE m[3][3];
     int occupiedPlaces;
 
-    // helpers
     void renderBoard() const;
     void renderPieces() const;
     bool checkRows() const;

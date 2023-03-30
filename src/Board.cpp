@@ -1,25 +1,17 @@
-// Board.cpp
-// Board class member-functions definition.
-//
-// Author: yat0 - https://github.com/yat0
-
 #include "Board.h"
 #include "App.h"
 #include "Util.h"
 
 Board::Board() { restart(); }
 
-// render the board and game pieces to the window
 void Board::render() const
 {
-    // set the drawing color to black
     SDL_SetRenderDrawColor(App::getRenderer(), 0x00, 0x00, 0x00, 0xFF);
 
     renderBoard();
     renderPieces();
 }
 
-// clear the game board
 void Board::restart()
 {
     for(int i=0; i<3; i++)
@@ -29,7 +21,6 @@ void Board::restart()
     occupiedPlaces = 0;
 }
 
-// check for win conditions
 bool Board::hasWinner() const
 {
     return (checkRows() || checkColumns() || checkDiagonals());
@@ -40,7 +31,6 @@ bool Board::isDraw() const
     return occupiedPlaces == 9;
 }
 
-// place a piece (human/pc) at (x,y) spot in the board
 void Board::place(int row, int col, bool humanPiece)
 {
     if(row>=0 && row<3 && col>=0 && col<3 && occupiedPlaces<9)
@@ -50,7 +40,6 @@ void Board::place(int row, int col, bool humanPiece)
     }
 }
 
-// return whether the (x,y) spot is empty
 bool Board::isFieldEmpty(int row, int col) const
 {
     if(row>=0 && row<3 && col>=0 && col<3)
@@ -59,7 +48,6 @@ bool Board::isFieldEmpty(int row, int col) const
     return false;
 }
 
-// return whether the (x,y) spot is filled with piece X
 bool Board::isFieldCross(int row, int col) const
 {
     if(row>=0 && row<3 && col>=0 && col<3)
@@ -68,7 +56,6 @@ bool Board::isFieldCross(int row, int col) const
     return false;
 }
 
-// return whether the (x,y) spot is filled with piece O
 bool Board::isFieldCircle(int row, int col) const
 {
     if(row>=0 && row<3 && col>=0 && col<3)
@@ -77,10 +64,8 @@ bool Board::isFieldCircle(int row, int col) const
     return false;
 }
 
-// render board lines
 void Board::renderBoard() const
 {
-    // vertical lines
     SDL_RenderDrawLine(App::getRenderer(),
         App::SCREEN_WIDTH/3, 0,
         App::SCREEN_WIDTH/3, App::SCREEN_HEIGHT);
@@ -89,7 +74,6 @@ void Board::renderBoard() const
         App::SCREEN_WIDTH/3*2, 0,
         App::SCREEN_WIDTH/3*2, App::SCREEN_HEIGHT);
 
-    // horizontal lines
     SDL_RenderDrawLine(App::getRenderer(),
         0, App::SCREEN_HEIGHT/3,
         App::SCREEN_WIDTH, App::SCREEN_HEIGHT/3);
@@ -99,7 +83,6 @@ void Board::renderBoard() const
         App::SCREEN_WIDTH, App::SCREEN_HEIGHT/3*2);
 }
 
-// render player pieces
 void Board::renderPieces() const
 {
     for(int i=0; i<3; i++)
@@ -117,7 +100,6 @@ void Board::renderPieces() const
         }
 }
 
-// check row win conditions
 bool Board::checkRows() const
 {
     if(m[0][0] == m[0][1] && m[0][1] == m[0][2] && !isFieldEmpty(0,2))
@@ -130,7 +112,6 @@ bool Board::checkRows() const
     return false;
 }
 
-// check column win conditions
 bool Board::checkColumns() const
 {
     if(m[0][0] == m[1][0] && m[1][0] == m[2][0] && !isFieldEmpty(2,0))
@@ -143,7 +124,6 @@ bool Board::checkColumns() const
     return false;
 }
 
-// check diagonal win conditions
 bool Board::checkDiagonals() const
 {
     if(m[0][0] == m[1][1] && m[1][1] == m[2][2] && !isFieldEmpty(2,2))
