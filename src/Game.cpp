@@ -155,7 +155,7 @@ int minimax(char board[][SIZE], int depth, bool isAI) {
 	}
 }
 
-int bestMove(char board[][SIZE], int moveIndex)
+int bestMove(char board[][SIZE], int markIndex)
 {
 	int x = -1, y = -1;
 	int score = 0, bestScore = -999;
@@ -166,7 +166,7 @@ int bestMove(char board[][SIZE], int moveIndex)
 			if (board[i][j] == ' ')
 			{
 				board[i][j] = AIMARK;
-				score = minimax(board, moveIndex+1, false);
+				score = minimax(board, markIndex+1, false);
 				board[i][j] = ' ';
 				if(score > bestScore)
 				{
